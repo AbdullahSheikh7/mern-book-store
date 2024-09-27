@@ -6,6 +6,8 @@ import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
 import { enqueueSnackbar } from "notistack"
 
+const backend = import.meta.env.VITE_Backend
+
 const EditBook = () => {
   const { id } = useParams();
   const [title, setTitle] = useState("");
@@ -20,7 +22,7 @@ const EditBook = () => {
       setLoading(true);
       LoadingBar.current.continuousStart();
       await axios
-        .get(`${window.location.protocol}//${window.location.hostname}:5000/books/${id}`)
+        .get(`${backend}/books/${id}`)
         .then((res) => {
           setLoading(false);
           LoadingBar.current.complete();
@@ -47,7 +49,7 @@ const EditBook = () => {
     setLoading(true);
     LoadingBar.current.continuousStart();
     await axios
-      .put(`${window.location.protocol}//${window.location.hostname}:5000/books/${id}`, data)
+      .put(`${backend}/books/${id}`, data)
       .then(() => {
         setLoading(false);
         LoadingBar.current.complete();

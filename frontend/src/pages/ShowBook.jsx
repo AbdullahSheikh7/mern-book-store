@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom"
 import BackButton from "../components/BackButton"
 import Spinner from "../components/Spinner";
 
+const backend = import.meta.env.VITE_Backend
+
 const ShowBook = () => {
   const [book, setBook] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -16,7 +18,7 @@ const ShowBook = () => {
       setLoading(true);
       LoadingBar.current.continuousStart();
       await axios
-      .get(`${window.location.protocol}//${window.location.hostname}:5000/books/${id}`)
+      .get(`${backend}/books/${id}`)
       .then((res) => {
         setBook(res.data);
         setLoading(false);

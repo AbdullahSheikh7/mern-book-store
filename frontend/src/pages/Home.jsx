@@ -7,6 +7,8 @@ import { MdOutlineAddBox } from "react-icons/md";
 import BooksCard from "../components/home/BooksCard";
 import BooksTable from "../components/home/BooksTable";
 
+const backend = import.meta.env.VITE_Backend
+
 const Home = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -21,7 +23,7 @@ const Home = () => {
       LoadingBar.current.continuousStart();
       await axios
         .get(
-          `${window.location.protocol}//${window.location.hostname}:5000/books`
+          `${backend}/books`
         )
         .then((res) => {
           setBooks(res.data.data);

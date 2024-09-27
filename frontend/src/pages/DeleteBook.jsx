@@ -6,6 +6,8 @@ import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
 import { enqueueSnackbar } from "notistack"
 
+const backend = import.meta.env.VITE_Backend
+
 const DeleteBook = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -16,7 +18,7 @@ const DeleteBook = () => {
     setLoading(true);
     LoadingBar.current.continuousStart();
     await axios
-      .delete(`${window.location.protocol}//${window.location.hostname}:5000/books/${id}`)
+      .delete(`${backend}/books/${id}`)
       .then(() => {
         setLoading(false);
         LoadingBar.current.complete();

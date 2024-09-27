@@ -6,6 +6,8 @@ import Spinner from "../components/Spinner";
 import { useNavigate } from "react-router-dom";
 import { enqueueSnackbar } from "notistack"
 
+const backend = import.meta.env.VITE_Backend
+
 const CreateBook = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -23,7 +25,7 @@ const CreateBook = () => {
     setLoading(true);
     LoadingBar.current.continuousStart();
     await axios
-      .post(`${window.location.protocol}//${window.location.hostname}:5000/books`, data)
+      .post(`${backend}/books`, data)
       .then(() => {
         setLoading(false);
         LoadingBar.current.complete();
